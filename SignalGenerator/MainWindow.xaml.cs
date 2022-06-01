@@ -32,14 +32,16 @@ namespace SignalGenerator
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            sPhase.Maximum = Math.PI * 2;
-            sPhase.Minimum = 0;
+
             pOriginalSignal.Plot.Title("Исходный сигнал");
             pRecievedSignal.Plot.Title("Полученный сигнал");
             pHarmonics.Plot.Title("Гармоники");
             pSpectrum.Plot.Title("Спектр исходного сигнала");
+            sFrequency.IsSnapToTickEnabled = true;
+            sFrequency.TickFrequency = 0.1;
 
-            pOriginalSignal.Plot.SetAxisLimits(0, dataY.Length, -10, 10);
+            pOriginalSignal.Plot.SetAxisLimits(0, dataY.Length, -2, 2);
+            pOriginalSignal.Plot.SetOuterViewLimits(0, 500);
             pOriginalSignal.Plot.AddSignal(dataY);
             VerticalLine = pOriginalSignal.Plot.AddVerticalLine(0, width: 2);
 
@@ -62,19 +64,19 @@ namespace SignalGenerator
             double phase = sPhase.Value;
             double frequency = sFrequency.Value;
             double period = 1 / frequency;
-            double time = frequency * Stopwatch.Elapsed.TotalSeconds + phase;
+            double time = frequency * Stopwatch.Elapsed.TotalSeconds;
 
             if ((bool)rbHarmonic.IsChecked)
             {
-                this.dataY[NextIndex] = amplitude * Math.Sin(2 * Math.PI * time);
+                this.dataY[NextIndex] = amplitude * Math.Sin(2 * Math.PI * time + phase);
             }
             if ((bool)rbSquare.IsChecked)
             {
-                this.dataY[NextIndex] = amplitude * Math.Sign(Math.Sin(2f * Math.PI * time)); 
+                this.dataY[NextIndex] = amplitude * Math.Sign(Math.Sin(2f * Math.PI * time + phase)); 
             }
             if ((bool)rbTriangle.IsChecked)
             {                
-                this.dataY[NextIndex] = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(time - 0.25f) - (time - 0.25f)));
+                this.dataY[NextIndex] = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(time + phase - 0.25f) - (time + phase - 0.25f)));
             }
 
             NextIndex += 1;
@@ -92,6 +94,17 @@ namespace SignalGenerator
         private void timer2_Tick(object sender, EventArgs e)
         {
             pOriginalSignal.Render();
+        }
+
+        private void mHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Интерактивные элементы управления:" +
+                $"\n     - перетаскивание левой кнопкой мыши: перемещение по графику" +
+                $"\n     - перетаскивание правой кнопкой мыши: масштабирование" +
+                $"\n     - перетаскивание средней кнопкой мыши: масштабирование области" +
+                $"\n     - колесо прокрутки: масштабирование" +
+                $"\n     - средний щелчок: подгонка данных" +
+                $"\n     - щелчок правой кнопкой мыши: меню развертывания");
         }
     }
 }
