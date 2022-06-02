@@ -29,23 +29,5 @@
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sPhase, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,241,903,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sFrequency, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,201,903,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sAmplitude, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="216,161,895,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
-        <DataGrid x:Name="dgDots" Margin="417,20,600,344" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="X" Binding="{Binding Key}" Width="70">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Y" Binding="{Binding Value}" Width="70">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-            </DataGrid.Columns>
-        </DataGrid>
     </Grid>
 </Window>

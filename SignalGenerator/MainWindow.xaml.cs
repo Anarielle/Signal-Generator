@@ -32,14 +32,27 @@ namespace SignalGenerator
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
+            
+            sFrequency.IsSnapToTickEnabled = true;
+            sFrequency.TickFrequency = 0.1;
+            rbHarmonic.IsChecked = true;
+        }
 
+        public void Initialize()
+        {
             pOriginalSignal.Plot.Title("Исходный сигнал");
             pRecievedSignal.Plot.Title("Полученный сигнал");
             pHarmonics.Plot.Title("Гармоники");
             pSpectrum.Plot.Title("Спектр исходного сигнала");
-            sFrequency.IsSnapToTickEnabled = true;
-            sFrequency.TickFrequency = 0.1;
-            rbHarmonic.IsChecked = true;
+
+            pOriginalSignal.Plot.SetAxisLimits(0, 50, -1, 1);
+            pOriginalSignal.Plot.SetOuterViewLimits(0, 10000);
+            pHarmonics.Plot.SetAxisLimits(0, 50, -1, 1);
+            pHarmonics.Plot.SetOuterViewLimits(0, 10000);
+            pSpectrum.Plot.SetAxisLimits(0, 20, -1, 1);
+            pSpectrum.Plot.SetOuterViewLimits(0, 10000);
+            pRecievedSignal.Plot.SetAxisLimits(0, 0.1, -1, 1);
+            pRecievedSignal.Plot.SetOuterViewLimits(0, 10000);
         }
 
         public void AddDataPoint()
@@ -47,61 +60,54 @@ namespace SignalGenerator
             pHarmonics.Reset();
             pOriginalSignal.Reset();
             pSpectrum.Reset();
-            
-            pOriginalSignal.Plot.SetAxisLimits(0, 50, -1, 1);
-            pOriginalSignal.Plot.SetOuterViewLimits(0, 10000);
-            pHarmonics.Plot.SetAxisLimits(0, 50, -1 ,1);
-            pHarmonics.Plot.SetOuterViewLimits(0, 10000);
-            pSpectrum.Plot.SetAxisLimits(0, 20, -1, 1);
-            pSpectrum.Plot.SetOuterViewLimits(0, 10000);
+            pRecievedSignal.Reset();
+
+            Initialize();
 
             var func1 = signal.BuildSignal();
-            pOriginalSignal.Plot.AddFunction(func1);
-            //double[] second = Generate.Sinusoidal(10000, 1, Frequency * 2, Amplitude / 2);
-            //double[] third = Generate.Sinusoidal(10000, 1, Frequency * 4, Amplitude / 4);
-            //pHarmonics.Plot.AddSignal(second);
-            //pHarmonics.Plot.AddSignal(third);
 
-
-            double period = 1 / signal.Frequency;
-            var firstHarmonica = new Func<double, double?>((x) => signal.Amplitude / 3 * Math.Sin(2 * Math.PI * signal.Frequency * 3 * x + signal.Phase));
-            var secondHarmonica = new Func<double, double?>((x) => signal.Amplitude / 5 * Math.Sin(2 * Math.PI * signal.Frequency * 5 * x + signal.Phase));
+            var firstHarmonica = new Func<double, double?>((x) => signal.Amplitude * Math.Sin(2 * Math.PI * signal.Frequency * x + signal.Phase));
+            var secondHarmonica = new Func<double, double?>((x) => signal.Amplitude / 3 * Math.Sin(2 * Math.PI * signal.Frequency * 3 * x + signal.Phase));
+            var thirdHarmonica = new Func<double, double?>((x) => signal.Amplitude / 5 * Math.Sin(2 * Math.PI * signal.Frequency * 5 * x + signal.Phase));
 
             pOriginalSignal.Plot.AddFunction(func1);
-            pHarmonics.Plot.AddFunction(func1);
             pHarmonics.Plot.AddFunction(firstHarmonica);
             pHarmonics.Plot.AddFunction(secondHarmonica);
+            pHarmonics.Plot.AddFunction(thirdHarmonica);
+            double[] dataY = new double[10000];
 
-            Complex[] samples = new Complex[1000];
-            for (int i = 0; i < 1000; i++)
+            Complex[] samples = new Complex[10000];
+            for (int i = 0; i < 10000; i++)
             {
                 samples[i] = new Complex((double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i)), 0);
+                dataY[i] = (double)func1.Invoke(i);
             }
 
-            double[] times = new double[200];
-            for (int i = 0; i < 200; i++)
+            double[] time = new double[10000];
+            for (int i = 0; i < 10000; i++)
             {
-                times[i] = ((i + 1.0) / 1000) / 2;
+                time[i] = ((i + 1.0) / 100) / 2;
             }
+            pRecievedSignal.Plot.AddScatter(time,dataY);
 
             Fourier.Forward(samples, FourierOptions.NoScaling);
 
+           
             double[] mag = new double[100];
             double[] hzPerSeconds = new double[100];
 
             for (int i = 0; i < 100; i++)
             {
                 mag[i] = (2.0 / 1000) * (Math.Abs(Math.Sqrt(Math.Pow(samples[i].Real, 2) + Math.Pow(samples[i].Imaginary, 2))));
-                hzPerSeconds[i] = 1000 / 1000 * i;
+                hzPerSeconds[i] = 2000 / 1000 * i;
             }
-
-            pSpectrum.Plot.AddBar(hzPerSeconds, mag);
+            
+            pSpectrum.Plot.AddScatter(hzPerSeconds, mag);
 
             pOriginalSignal.Refresh();
             pHarmonics.Refresh();
             pSpectrum.Refresh();
-
-            //dgDots.Items.Refresh();
+            pRecievedSignal.Refresh();
         }
 
         private void mHelp_Click(object sender, RoutedEventArgs e)
