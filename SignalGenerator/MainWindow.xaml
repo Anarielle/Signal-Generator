@@ -8,27 +8,27 @@
         Title="MainWindow" Height="700" Width="1200">
     <Grid>
         <Menu x:Name="mMenu">
-            <MenuItem x:Name="mHelp" Header="Справка" Click="mHelp_Click" />
+            <MenuItem x:Name="mRealTime" Header="Представление в реальном времени" Click="mRealTime_Click"/>
+            <MenuItem x:Name="mHelp" Header="Справка" Click="mHelp_Click"/>
         </Menu>
-        <RadioButton x:Name="rbHarmonic" Content="Гармонический" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" IsChecked="True" />
+        <RadioButton x:Name="rbHarmonic" Content="Гармонический" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Checked="rbHarmonic_Checked"  />
         <Label Content="Вид сигнала" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbSquare" Content="Прямоугольный" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbTriangle" Content="Треугольный" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbSquare" Content="Прямоугольный" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Checked="rbSquare_Checked" />
+        <RadioButton x:Name="rbTriangle" Content="Треугольный" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Checked="rbTriangle_Checked" />
         <Label Content="Параметры сигнала" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
         <WpfPlot x:Name="pOriginalSignal" HorizontalAlignment="Right" Margin="0,20,10,0" VerticalAlignment="Top" Height="180" Width="560" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
         <WpfPlot x:Name="pRecievedSignal" HorizontalAlignment="Right" Margin="0,200,10,0" VerticalAlignment="Top" Height="180" Width="560"/>
         <WpfPlot x:Name="pHarmonics" HorizontalAlignment="Right" Margin="0,380,10,0" VerticalAlignment="Top" Height="180" Width="560"/>
         <WpfPlot x:Name="pSpectrum" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Height="180" Width="560"/>
-        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1"/>
-        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10"/>
-        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360"/>
+        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1" ValueChanged="sAmplitude_ValueChanged"/>
+        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10" ValueChanged="sFrequency_ValueChanged"/>
+        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360" ValueChanged="sPhase_ValueChanged"/>
         <Label Content="Амлитуда" HorizontalAlignment="Left" Margin="135,146,0,0" VerticalAlignment="Top" Width="77"/>
         <Label Content="Частота" HorizontalAlignment="Left" Margin="135,186,0,0" VerticalAlignment="Top"/>
         <Label Content="Фаза" HorizontalAlignment="Left" Margin="135,226,0,0" VerticalAlignment="Top"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sPhase, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="193,229,954,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sFrequency, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="193,189,954,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sAmplitude, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="202,149,945,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
-        <Button x:Name="bStop" Content="Остановить" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" Click="Button_Click" Width="91"/>
         <DataGrid x:Name="dgDots" Margin="417,20,600,344" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="X" Binding="{Binding Key}" Width="70">

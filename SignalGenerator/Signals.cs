@@ -12,53 +12,34 @@ namespace SignalGenerator
         public double Amplitude { get; set; } = 0;
         public double Phase { get; set; } = 0;
         public double Frequency { get; set; } = 0;
-        
-        //public Signal(double amplitude, double phase, double frequency)
-        //{
-        //    Amplitude = amplitude;
-        //    Phase = phase;
-        //    Frequency = frequency;
-        //}
+        public SignalType SignalType { get; set; }
 
-
-
-        public double[] HarmonicSignal(double t)
+        public Signal(double amplitude, double phase, double frequency, SignalType signalType)
         {
-            double[] yValues = new double[500];
-            for (int i = 0; i < yValues.Length; i++)
-            {
-                yValues[i] = Amplitude * (float)Math.Sin(2f * Math.PI * (Frequency * i + Phase));
-            }
-
-            return yValues;
+            Amplitude = amplitude;
+            Phase = phase;
+            Frequency = frequency;
+            SignalType = signalType;
+            BuildSignal();
         }
 
-        public double[] TriangleSignal(double[] dataX)
+        public Func<double, double?> BuildSignal()
         {
-            double[] yValues = new double[500];
-            for (int i = 0; i < yValues.Length; i++)
+            Func<double,double?> func1;
+            switch (SignalType)
             {
-                yValues[i] = Amplitude * (1f - 4f * (float)Math.Abs(Math.Round((Frequency * i + Phase) - 0.25f) - ((Frequency * i + Phase) - 0.25f)));
-            }
-            
-            return yValues;
-
-            //value = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(t - 0.25f) - (t - 0.25f)));
-        }
-
-        public double[] SquareSignal()
-        {           
-            double[] yValues = new double[500];
-            double pi = 0;
-            for (int i = 0; i < yValues.Length; i++)
-            {
-                yValues[i] = Amplitude * Math.Sign(Math.Sin(2 * Math.PI * Frequency + Phase)); ;
-                pi += Math.PI;
+                case SignalType.Harmonic:
+                    func1 = new Func<double, double?>((x) => Amplitude * Math.Sin(2 * Math.PI * Frequency * x + Phase));
+                    break;
+                case SignalType.Triangle:
+                    func1 = new Func<double, double?>((x) => Amplitude * (1f - 4f * (float)Math.Abs(Math.Round(x + Phase - 0.25f) - (x + Phase - 0.25f))));
+                    break;
+                default:
+                    func1 = new Func<double, double?>((x) => Amplitude * Math.Sign(Math.Sin(2f * Math.PI * x + Phase)));
+                    break;
             }
 
-            return yValues;
-
-            //value = amplitude * Math.Sign(Math.Sin(2f * Math.PI * t));
+            return func1;
         }
     }
 }
