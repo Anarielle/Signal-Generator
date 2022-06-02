@@ -23,10 +23,14 @@ namespace SignalGenerator
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly double[] dataY = new double[500];
+        readonly double[] dataY = new double[10000];
+        readonly Dictionary<double, double> dataXY = new Dictionary<double, double>();
         readonly Stopwatch Stopwatch = Stopwatch.StartNew();
         readonly ScottPlot.Plottable.VLine VerticalLine;
         int NextIndex = 0;
+
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
 
         public MainWindow()
         {
@@ -40,58 +44,66 @@ namespace SignalGenerator
             sFrequency.IsSnapToTickEnabled = true;
             sFrequency.TickFrequency = 0.1;
 
-            pOriginalSignal.Plot.SetAxisLimits(0, dataY.Length, -2, 2);
-            pOriginalSignal.Plot.SetOuterViewLimits(0, 500);
+
+            pOriginalSignal.Plot.SetAxisLimits(0, 250, -1, 1);
+            pOriginalSignal.Plot.SetOuterViewLimits(0, 10000);
             pOriginalSignal.Plot.AddSignal(dataY);
             VerticalLine = pOriginalSignal.Plot.AddVerticalLine(0, width: 2);
 
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
-            dispatcherTimer.Tick += timer1_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            dispatcherTimer.Tick += timer1Tick;
             dispatcherTimer.Start();
 
-            DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
-            dispatcherTimer1.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            dispatcherTimer1.Tick += timer2_Tick;
+            dispatcherTimer1.Interval = new TimeSpan(0, 0, 0, 0, 50);
+            dispatcherTimer1.Tick += timer2Tick;
             dispatcherTimer1.Start();
-        }
 
-        public Signal signal = new Signal();
+            dgDots.ItemsSource = dataXY;
+        }
 
         public void AddDataPoint()
         {
             double amplitude = sAmplitude.Value;
-            double phase = sPhase.Value;
+            double phase = sPhase.Value * Math.PI / 180;
             double frequency = sFrequency.Value;
-            double period = 1 / frequency;
             double time = frequency * Stopwatch.Elapsed.TotalSeconds;
 
             if ((bool)rbHarmonic.IsChecked)
             {
-                this.dataY[NextIndex] = amplitude * Math.Sin(2 * Math.PI * time + phase);
+                dataY[NextIndex] = amplitude * Math.Sin(2 * Math.PI * time + phase);
+                dataXY.Add(Math.Round(Stopwatch.Elapsed.TotalSeconds, 3), Math.Round(dataY[NextIndex], 3));
             }
             if ((bool)rbSquare.IsChecked)
             {
-                this.dataY[NextIndex] = amplitude * Math.Sign(Math.Sin(2f * Math.PI * time + phase)); 
+                dataY[NextIndex] = amplitude * Math.Sign(Math.Sin(2f * Math.PI * time + phase));
+                dataXY.Add(Math.Round(Stopwatch.Elapsed.TotalSeconds, 3), Math.Round(dataY[NextIndex], 3));
             }
             if ((bool)rbTriangle.IsChecked)
-            {                
-                this.dataY[NextIndex] = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(time + phase - 0.25f) - (time + phase - 0.25f)));
+            {
+                dataY[NextIndex] = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(time + phase - 0.25f) - (time + phase - 0.25f)));
+                dataXY.Add(Math.Round(Stopwatch.Elapsed.TotalSeconds, 3), Math.Round(dataY[NextIndex], 3));
             }
 
-            NextIndex += 1;
+            dgDots.Items.Refresh();
+            NextIndex++;
             if (NextIndex >= this.dataY.Length)
                 NextIndex = 0;
+
+            var xLimits = pOriginalSignal.Plot.GetAxisLimits();
+            if (xLimits.XMax < NextIndex)
+            {
+                pOriginalSignal.Plot.SetAxisLimitsX(NextIndex, NextIndex + 250);
+            }
 
             VerticalLine.X = NextIndex;
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1Tick(object sender, EventArgs e)
         {
             AddDataPoint();
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void timer2Tick(object sender, EventArgs e)
         {
             pOriginalSignal.Render();
         }
@@ -105,6 +117,24 @@ namespace SignalGenerator
                 $"\n     - колесо прокрутки: масштабирование" +
                 $"\n     - средний щелчок: подгонка данных" +
                 $"\n     - щелчок правой кнопкой мыши: меню развертывания");
+        }
+        int count = 0;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            count++;
+            if (count % 2 == 1)
+            {
+                dispatcherTimer.Stop();
+                dispatcherTimer1.Stop();
+                bStop.Content = "Продолжить";
+            }
+
+            if (count % 2 == 0)
+            {
+                dispatcherTimer.Start();
+                dispatcherTimer1.Start();
+                bStop.Content = "Остановить";
+            }
         }
     }
 }
