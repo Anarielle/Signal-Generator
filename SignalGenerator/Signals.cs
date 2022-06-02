@@ -25,17 +25,17 @@ namespace SignalGenerator
 
         public Func<double, double?> BuildSignal()
         {
-            Func<double,double?> func1;
+            Func<double, double?> func1;
             switch (SignalType)
             {
                 case SignalType.Harmonic:
                     func1 = new Func<double, double?>((x) => Amplitude * Math.Sin(2 * Math.PI * Frequency * x + Phase));
                     break;
                 case SignalType.Triangle:
-                    func1 = new Func<double, double?>((x) => Amplitude * (1f - 4f * (float)Math.Abs(Math.Round(x + Phase - 0.25f) - (x + Phase - 0.25f))));
+                    func1 = new Func<double, double?>((x) => Amplitude * (1f - 4f * (float)Math.Abs(Math.Round(x * Frequency + Phase - 0.25f) - (x * Frequency + Phase - 0.25f))));
                     break;
                 default:
-                    func1 = new Func<double, double?>((x) => Amplitude * Math.Sign(Math.Sin(2f * Math.PI * x + Phase)));
+                    func1 = new Func<double, double?>((x) => Amplitude * Math.Sign(Math.Sin(2f * Math.PI * x * Frequency + Phase)));
                     break;
             }
 

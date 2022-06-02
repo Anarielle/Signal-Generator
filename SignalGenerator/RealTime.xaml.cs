@@ -35,6 +35,7 @@ namespace SignalGenerator
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
 
+            pOriginalSignal.Plot.Title("Исходный сигнал");
             pOriginalSignal.Plot.SetAxisLimits(0, 250, -1, 1);
             pOriginalSignal.Plot.SetOuterViewLimits(0, 10000);
             pOriginalSignal.Plot.AddSignal(dataY, 1);
@@ -47,6 +48,8 @@ namespace SignalGenerator
             dispatcherTimer1.Interval = new TimeSpan(0, 0, 0, 0, 50);
             dispatcherTimer1.Tick += timer2Tick;
             dispatcherTimer1.Start();
+
+            dgDots.ItemsSource = dataXY;
         }
 
         public void AddDataPoint()
@@ -71,7 +74,8 @@ namespace SignalGenerator
                 dataY[NextIndex] = amplitude * (1f - 4f * (float)Math.Abs(Math.Round(time + phase - 0.25f) - (time + phase - 0.25f)));
                 dataXY.Add(Math.Round(Stopwatch.Elapsed.TotalSeconds, 3), Math.Round(dataY[NextIndex], 3));
             }
-                        
+
+            dgDots.Items.Refresh();
             NextIndex++;
             if (NextIndex >= this.dataY.Length)
                 NextIndex = 0;
