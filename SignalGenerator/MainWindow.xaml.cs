@@ -26,13 +26,13 @@ namespace SignalGenerator
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-        public Signal signal = new Signal(1,0,0.1,SignalType.Harmonic);
-        
+        public Signal signal = new Signal(1, 0, 0.1, SignalType.Harmonic);
+
         public MainWindow()
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-            
+
             sFrequency.IsSnapToTickEnabled = true;
             sFrequency.TickFrequency = 0.1;
             rbHarmonic.IsChecked = true;
@@ -80,7 +80,7 @@ namespace SignalGenerator
             for (int i = 0; i < 10000; i++)
             {
                 samples[i] = new Complex((double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i)), 0);
-                dataY[i] = (double)func1.Invoke(i);
+                dataY[i] = (double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i));
             }
 
             double[] time = new double[10000];
@@ -88,20 +88,20 @@ namespace SignalGenerator
             {
                 time[i] = ((i + 1.0) / 100) / 2;
             }
-            pRecievedSignal.Plot.AddScatter(time,dataY);
+            pRecievedSignal.Plot.AddScatter(time, dataY);
 
             Fourier.Forward(samples, FourierOptions.NoScaling);
 
-           
+
             double[] mag = new double[100];
             double[] hzPerSeconds = new double[100];
 
             for (int i = 0; i < 100; i++)
             {
-                mag[i] = (2.0 / 1000) * (Math.Abs(Math.Sqrt(Math.Pow(samples[i].Real, 2) + Math.Pow(samples[i].Imaginary, 2))));
+                mag[i] = (2.0 / 100) * (Math.Abs(Math.Sqrt(Math.Pow(samples[i].Real, 2) + Math.Pow(samples[i].Imaginary, 2))));
                 hzPerSeconds[i] = 2000 / 1000 * i;
             }
-            
+
             pSpectrum.Plot.AddScatter(hzPerSeconds, mag);
 
             pOriginalSignal.Refresh();
@@ -151,13 +151,13 @@ namespace SignalGenerator
         }
 
         private void sFrequency_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {            
+        {
             signal.Frequency = sFrequency.Value;
             AddDataPoint();
         }
 
         private void sPhase_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {           
+        {
             signal.Phase = sPhase.Value * Math.PI / 180;
             AddDataPoint();
         }

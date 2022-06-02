@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SignalGenerator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="596" Width="1161">
+        Title="Генератор сигналов" Height="596" Width="1161">
     <Grid>
         <Menu x:Name="mMenu">
             <MenuItem x:Name="mRealTime" Header="Представление в реальном времени" Click="mRealTime_Click"/>

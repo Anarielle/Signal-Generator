@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SignalGenerator"
         mc:Ignorable="d"
-        Title="Window1" Height="508" Width="600">
+        Title="Генерация в реальном времени" Height="508" Width="600">
     <Grid>
         <WpfPlot x:Name="pOriginalSignal" HorizontalAlignment="Center" Margin="0,302,0,0" VerticalAlignment="Top" Height="180" Width="560" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
         <RadioButton x:Name="rbHarmonic" Content="Гармонический" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" IsChecked="True" />
