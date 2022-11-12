@@ -1,1 +1,1 @@
-# SignalGenerator
+# Signal Generator
