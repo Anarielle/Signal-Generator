@@ -86,7 +86,7 @@ namespace SignalGenerator
             double[] time = new double[10000];
             for (int i = 0; i < 10000; i++)
             {
-                time[i] = ((i + 1.0) / 10000) / 2;
+                time[i] = ((i + 1.0) / 1000) / 2;
             }
             pRecievedSignal.Plot.AddScatter(time, dataY);
 
