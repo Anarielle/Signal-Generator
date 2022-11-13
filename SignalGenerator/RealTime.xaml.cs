@@ -56,7 +56,7 @@ namespace SignalGenerator
         {
             double amplitude = sAmplitude.Value;
             double phase = sPhase.Value * Math.PI / 180;
-            double frequency = sFrequency.Value;
+            double frequency = sFrequency.Value/5;
             double time = frequency * Stopwatch.Elapsed.TotalSeconds;
 
             if ((bool)rbHarmonic.IsChecked)
