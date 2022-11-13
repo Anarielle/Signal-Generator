@@ -32,13 +32,7 @@ namespace SignalGenerator
         {
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
-
-            sFrequency.IsSnapToTickEnabled = true;
-            sFrequency.TickFrequency = 0.1;
-            sAmplitude.IsSnapToTickEnabled = true;
-            sAmplitude.TickFrequency = 0.1;
-            sPhase.IsSnapToTickEnabled = true;
-            sPhase.TickFrequency = 0.1;
+            
             rbHarmonic.IsChecked = true;
         }
 

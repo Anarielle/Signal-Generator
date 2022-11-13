@@ -17,9 +17,9 @@
         <RadioButton x:Name="rbSquare" Content="Прямоугольный" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Height="15" Width="108"/>
         <RadioButton x:Name="rbTriangle" Content="Треугольный" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="15" Width="91"/>
         <Label Content="Параметры сигнала" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Height="26" Width="119"/>
-        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1" Height="18"/>
-        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10" Height="18" Value="1"/>
-        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360" Height="18"/>
+        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1" Height="18" TickFrequency="0.1" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10" Height="18" Value="1" IsSnapToTickEnabled="True" TickFrequency="0.1"/>
+        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360" Height="18" IsSnapToTickEnabled="True"/>
         <Label Content="Амлитуда" HorizontalAlignment="Left" Margin="135,144,0,0" VerticalAlignment="Top" Width="77" Height="26"/>
         <Label Content="Частота" HorizontalAlignment="Left" Margin="135,186,0,0" VerticalAlignment="Top" Height="26" Width="53"/>
         <Label Content="Фаза" HorizontalAlignment="Left" Margin="135,226,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
