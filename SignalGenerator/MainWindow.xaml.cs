@@ -66,25 +66,26 @@ namespace SignalGenerator
 
             var func1 = signal.BuildSignal();
 
-            var firstHarmonica = new Func<double, double?>((x) => signal.Amplitude * Math.Sin(2 * Math.PI * signal.Frequency * x + signal.Phase));
-            var secondHarmonica = new Func<double, double?>((x) => signal.Amplitude / 3 * Math.Sin(2 * Math.PI * signal.Frequency * 3 * x + signal.Phase));
-            var thirdHarmonica = new Func<double, double?>((x) => signal.Amplitude / 5 * Math.Sin(2 * Math.PI * signal.Frequency * 5 * x + signal.Phase));
+            var firstHarmonica = new Func<double, double?>((x) => signal.Amplitude * Math.Sin(2 * Math.PI * signal.Frequency / 10 * x + signal.Phase));
+            var secondHarmonica = new Func<double, double?>((x) => signal.Amplitude / 3 * Math.Sin(2 * Math.PI * signal.Frequency / 10 * 3 * x + signal.Phase));
+            var thirdHarmonica = new Func<double, double?>((x) => signal.Amplitude / 5 * Math.Sin(2 * Math.PI * signal.Frequency / 10 * 5 * x + signal.Phase));
 
             pOriginalSignal.Plot.AddFunction(func1);
             pHarmonics.Plot.AddFunction(firstHarmonica);
             pHarmonics.Plot.AddFunction(secondHarmonica);
             pHarmonics.Plot.AddFunction(thirdHarmonica);
-            double[] dataY = new double[10000];
 
-            Complex[] samples = new Complex[10000];
-            for (int i = 0; i < 10000; i++)
+            double[] dataY = new double[1000];
+            Complex[] samples = new Complex[1000];
+            double[] time = new double[1000];
+
+            for (int i = 0; i < 1000; i++)
             {
                 samples[i] = new Complex((double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i)), 0);
                 dataY[i] = (double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i));
             }
 
-            double[] time = new double[10000];
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 time[i] = ((i + 1.0) / 1000) / 2;
             }
