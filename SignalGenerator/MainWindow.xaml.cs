@@ -86,20 +86,20 @@ namespace SignalGenerator
             double[] time = new double[10000];
             for (int i = 0; i < 10000; i++)
             {
-                time[i] = ((i + 1.0) / 100) / 2;
+                time[i] = ((i + 1.0) / 10000) / 2;
             }
             pRecievedSignal.Plot.AddScatter(time, dataY);
 
             Fourier.Forward(samples, FourierOptions.NoScaling);
 
 
-            double[] mag = new double[100];
-            double[] hzPerSeconds = new double[100];
+            double[] mag = new double[1000];
+            double[] hzPerSeconds = new double[1000];
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
-                mag[i] = (2.0 / 100) * (Math.Abs(Math.Sqrt(Math.Pow(samples[i].Real, 2) + Math.Pow(samples[i].Imaginary, 2))));
-                hzPerSeconds[i] = 2000 / 1000 * i;
+                mag[i] = (2.0 / 1000) * (Math.Abs(Math.Sqrt(Math.Pow(samples[i].Real, 2) + Math.Pow(samples[i].Imaginary, 2))));
+                hzPerSeconds[i] = 441000 / 10000 * i;
             }
 
             pSpectrum.Plot.AddScatter(hzPerSeconds, mag);

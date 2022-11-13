@@ -5,29 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SignalGenerator"
         mc:Ignorable="d"
-        Title="Генератор сигналов" Height="596" Width="1161">
+        Title="Генератор сигналов" Height="600" Width="1150" MinHeight="600" MinWidth="1150">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="583"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Menu x:Name="mMenu">
             <MenuItem x:Name="mRealTime" Header="Представление в реальном времени" Click="mRealTime_Click"/>
             <MenuItem x:Name="mHelp" Header="Справка" Click="mHelp_Click"/>
         </Menu>
-        <RadioButton x:Name="rbHarmonic" Content="Гармонический" HorizontalAlignment="Left" Margin="24,62,0,0" VerticalAlignment="Top" Checked="rbHarmonic_Checked"  />
-        <Label Content="Вид сигнала" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="rbSquare" Content="Прямоугольный" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top" Checked="rbSquare_Checked" />
-        <RadioButton x:Name="rbTriangle" Content="Треугольный" HorizontalAlignment="Left" Margin="24,102,0,0" VerticalAlignment="Top" Checked="rbTriangle_Checked" />
-        <Label Content="Параметры сигнала" HorizontalAlignment="Left" Margin="24,132,0,0" VerticalAlignment="Top"/>
-        <WpfPlot x:Name="pOriginalSignal" HorizontalAlignment="Right" Margin="0,20,20,0" VerticalAlignment="Top" Height="180" Width="560" ScrollViewer.HorizontalScrollBarVisibility="Visible"/>
-        <WpfPlot x:Name="pRecievedSignal" HorizontalAlignment="Right" Margin="0,200,20,0" VerticalAlignment="Top" Height="180" Width="560"/>
-        <WpfPlot x:Name="pHarmonics" HorizontalAlignment="Right" Margin="0,380,20,0" VerticalAlignment="Top" Height="180" Width="560"/>
-        <WpfPlot x:Name="pSpectrum" HorizontalAlignment="Left" Margin="20,0,0,20" VerticalAlignment="Bottom" Height="180" Width="560"/>
-        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="24,162,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1" ValueChanged="sAmplitude_ValueChanged"/>
-        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="24,202,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10" ValueChanged="sFrequency_ValueChanged"/>
-        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="24,242,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360" ValueChanged="sPhase_ValueChanged"/>
-        <Label Content="Амлитуда" HorizontalAlignment="Left" Margin="150,158,0,0" VerticalAlignment="Top" Width="76"/>
-        <Label Content="Частота" HorizontalAlignment="Left" Margin="150,198,0,0" VerticalAlignment="Top"/>
-        <Label Content="Фаза" HorizontalAlignment="Left" Margin="150,238,0,0" VerticalAlignment="Top"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sPhase, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,241,903,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sFrequency, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,201,903,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sAmplitude, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="216,161,895,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
+        <RadioButton x:Name="rbHarmonic" Content="Гармонический" HorizontalAlignment="Left" Margin="24,62,0,0" VerticalAlignment="Top" Checked="rbHarmonic_Checked" Height="15" Width="106"  />
+        <Label Content="Вид сигнала" HorizontalAlignment="Left" Margin="24,32,0,0" VerticalAlignment="Top" Height="26" Width="76"/>
+        <RadioButton x:Name="rbSquare" Content="Прямоугольный" HorizontalAlignment="Left" Margin="24,82,0,0" VerticalAlignment="Top" Checked="rbSquare_Checked" Height="15" Width="108" />
+        <RadioButton x:Name="rbTriangle" Content="Треугольный" HorizontalAlignment="Left" Margin="24,102,0,0" VerticalAlignment="Top" Checked="rbTriangle_Checked" Height="15" Width="91" />
+        <Label Content="Параметры сигнала" HorizontalAlignment="Left" Margin="20,131,0,0" VerticalAlignment="Top" Height="26" Width="119"/>
+        <WpfPlot x:Name="pOriginalSignal" HorizontalAlignment="Center" VerticalAlignment="Top" Height="180" Width="560" ScrollViewer.HorizontalScrollBarVisibility="Visible" Grid.Column="1"/>
+        <WpfPlot x:Name="pRecievedSignal" HorizontalAlignment="Center" Margin="0,180,0,0" VerticalAlignment="Top" Height="180" Width="560" Grid.Column="1"/>
+        <WpfPlot x:Name="pHarmonics" HorizontalAlignment="Left" Margin="0,360,0,0" VerticalAlignment="Top" Height="180" Width="560"/>
+        <WpfPlot x:Name="pSpectrum" HorizontalAlignment="Center" Margin="0,360,0,0" VerticalAlignment="Top" Height="180" Width="560" Grid.Column="1"/>
+        <Slider x:Name="sAmplitude" HorizontalAlignment="Left" Margin="24,162,0,0" VerticalAlignment="Top" Width="120" Maximum="10" Minimum="1" ValueChanged="sAmplitude_ValueChanged" Height="18"/>
+        <Slider x:Name="sFrequency" HorizontalAlignment="Left" Margin="24,202,0,0" VerticalAlignment="Top" Width="120" Minimum="0.1" Maximum="10" ValueChanged="sFrequency_ValueChanged" Height="18"/>
+        <Slider x:Name="sPhase" HorizontalAlignment="Left" Margin="24,242,0,0" VerticalAlignment="Top" Width="120" Minimum="0" Maximum="360" ValueChanged="sPhase_ValueChanged" Height="18"/>
+        <Label Content="Амлитуда" HorizontalAlignment="Left" Margin="150,158,0,0" VerticalAlignment="Top" Width="76" Height="26"/>
+        <Label Content="Частота" HorizontalAlignment="Left" Margin="150,198,0,0" VerticalAlignment="Top" Height="26" Width="53"/>
+        <Label Content="Фаза" HorizontalAlignment="Left" Margin="150,238,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sPhase, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,241,301,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sFrequency, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="208,201,301,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
+        <TextBox TextWrapping="Wrap" Text="{Binding ElementName=sAmplitude, Path=Value, UpdateSourceTrigger=PropertyChanged}" Margin="216,161,293,0" Height="20" VerticalAlignment="Top" BorderThickness="0,0,0,2" TextAlignment="Center" Background="#FFF0F0F0"/>
     </Grid>
 </Window>
