@@ -35,6 +35,10 @@ namespace SignalGenerator
 
             sFrequency.IsSnapToTickEnabled = true;
             sFrequency.TickFrequency = 0.1;
+            sAmplitude.IsSnapToTickEnabled = true;
+            sAmplitude.TickFrequency = 0.1;
+            sPhase.IsSnapToTickEnabled = true;
+            sPhase.TickFrequency = 0.1;
             rbHarmonic.IsChecked = true;
         }
 
@@ -75,17 +79,17 @@ namespace SignalGenerator
             pHarmonics.Plot.AddFunction(secondHarmonica);
             pHarmonics.Plot.AddFunction(thirdHarmonica);
 
-            double[] dataY = new double[1000];
-            Complex[] samples = new Complex[1000];
-            double[] time = new double[1000];
+            double[] dataY = new double[10000];
+            Complex[] samples = new Complex[10000];
+            double[] time = new double[10000];
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 samples[i] = new Complex((double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i)), 0);
                 dataY[i] = (double)(func1.Invoke(i) + firstHarmonica.Invoke(i) + secondHarmonica.Invoke(i));
             }
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 time[i] = ((i + 1.0) / 1000) / 2;
             }
