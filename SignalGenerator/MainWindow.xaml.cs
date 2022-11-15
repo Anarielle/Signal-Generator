@@ -26,7 +26,7 @@ namespace SignalGenerator
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-        public Signal signal = new Signal(1, 0, 0.1, SignalType.Harmonic);
+        private Signal signal = new Signal(1, 0, 0.1, SignalType.Harmonic);
 
         public MainWindow()
         {

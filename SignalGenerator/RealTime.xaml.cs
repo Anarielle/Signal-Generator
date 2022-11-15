@@ -105,18 +105,18 @@ namespace SignalGenerator
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             count++;
-            if (count % 2 == 1)
-            {
-                dispatcherTimer.Stop();
-                dispatcherTimer1.Stop();
-                bStop.Content = "Продолжить";
-            }
-            
-            else
+            if (count % 2 == 0)
             {
                 dispatcherTimer.Start();
                 dispatcherTimer1.Start();
                 bStop.Content = "Остановить";
+            }
+            
+            else
+            {
+                dispatcherTimer.Stop();
+                dispatcherTimer1.Stop();
+                bStop.Content = "Продолжить";                
             }
         }
     }
