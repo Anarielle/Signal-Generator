@@ -27,8 +27,8 @@ namespace SignalGenerator
         readonly ScottPlot.Plottable.VLine VerticalLine;
         int NextIndex;
 
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
+        readonly DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        readonly DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
 
         public RealTime()
         {
@@ -78,7 +78,9 @@ namespace SignalGenerator
             dgDots.Items.Refresh();
             NextIndex++;
             if (NextIndex >= this.dataY.Length)
+            {
                 NextIndex = 0;
+            }
 
             var xLimits = pOriginalSignal.Plot.GetAxisLimits();
             if (xLimits.XMax < NextIndex)
@@ -109,8 +111,8 @@ namespace SignalGenerator
                 dispatcherTimer1.Stop();
                 bStop.Content = "Продолжить";
             }
-
-            if (count % 2 == 0)
+            
+            else
             {
                 dispatcherTimer.Start();
                 dispatcherTimer1.Start();
