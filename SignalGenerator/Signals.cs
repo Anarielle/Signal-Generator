@@ -9,9 +9,9 @@ namespace SignalGenerator
 {
     public class Signal
     {
-        public double Amplitude { get; set; } = 0;
-        public double Phase { get; set; } = 0;
-        public double Frequency { get; set; } = 0;
+        public double Amplitude { get; set; }
+        public double Phase { get; set; }
+        public double Frequency { get; set; }
         public SignalType SignalType { get; set; }
 
         public Signal(double amplitude, double phase, double frequency, SignalType signalType)

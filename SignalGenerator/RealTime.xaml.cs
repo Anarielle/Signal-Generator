@@ -25,7 +25,7 @@ namespace SignalGenerator
         readonly Dictionary<double, double> dataXY = new Dictionary<double, double>();
         readonly Stopwatch Stopwatch = Stopwatch.StartNew();
         readonly ScottPlot.Plottable.VLine VerticalLine;
-        int NextIndex = 0;
+        int NextIndex;
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         DispatcherTimer dispatcherTimer1 = new DispatcherTimer();
@@ -99,7 +99,7 @@ namespace SignalGenerator
             pOriginalSignal.Render();
         }
 
-        int count = 0;
+        int count;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             count++;
