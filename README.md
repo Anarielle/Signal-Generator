@@ -12,19 +12,19 @@ Using the switches and sliders you can adjust the waveform, the graphs will be u
 
 ## Features
 A few things you can do in the signal generator:
-- Select the shape of the generated signal (harmonic, triangular, rectangular)
-- Change the signal parameters using the sliders or the text field next to them
-- Scale, copy and save resulting graphics
-- View plotting in real time
-- Change graph parameters in real time
+-   Select the shape of the generated signal (harmonic, triangular, rectangular)
+-   Change the signal parameters using the sliders or the text field next to them
+-   Scale, copy and save resulting graphics
+-   View plotting in real time
+-   Change graph parameters in real time
 
 ![Alt text](./Resources/SG_functional.gif)
 
 ## Technologies
--  .NET Fraemwork 4.8 
--  WPF
--  C#
--  [ScottPlot](https://scottplot.net/ "Go to the ScottPlot website") library version 4.1.45
+-   .NET Fraemwork 4.8 
+-   WPF
+-   C#
+-   [ScottPlot](https://scottplot.net/ "Go to the ScottPlot website") library version 4.1.45
 
 ## Project status
 In the future, it is planned to refine the application: correct the display of the signal spectrum, change/add a spectrogram graph, adding the ability to display audio signal graphs from a microphone.
