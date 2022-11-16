@@ -109,17 +109,6 @@ namespace SignalGenerator
             pRecievedSignal.Refresh();
         }
 
-        private void mHelp_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show($"Интерактивные элементы управления:" +
-                $"\n     - перетаскивание левой кнопкой мыши: перемещение по графику" +
-                $"\n     - перетаскивание правой кнопкой мыши: масштабирование по осям" +
-                $"\n     - перетаскивание средней кнопкой мыши: масштабирование области" +
-                $"\n     - колесо прокрутки: зум" +
-                $"\n     - средний щелчок: автомасштабирование" +
-                $"\n     - щелчок правой кнопкой мыши: меню взаимодействий");
-        }
-
         private void mRealTime_Click(object sender, RoutedEventArgs e)
         {
             new RealTime().Show();

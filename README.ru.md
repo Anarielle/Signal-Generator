@@ -1,14 +1,17 @@
 # Генератор сигналов
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/561dd59e468546138fe62c7d0be50caf)](https://www.codacy.com/gh/Anarielle/SignalGenerator/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Anarielle/SignalGenerator&amp;utm_campaign=Badge_Grade)
 
-![Alt text](./Resources/SG_realtime.gif) 
+<div align="center">
+
+![Alt text](./Resources/SG_realtime.gif) </div>
 
 ## О проекте 
 Генератор сигналов позволяет генерировать сигнал различной формы с заданной частотой, амплитудой и фазой.
 На главном экране отображаются графики исходного сигнала, гармоник, полученного сигнала и спектра исходного сигнала (с двумя последними есть проблемы). 
 Используя переключатели и слайдеры вы можете настроить форму сигнала, графики обновятся сразу же после внесения изменений.
+<div align="center">
 
-![Alt text](./Resources/SG_harmonic.png) 
+![Alt text](./Resources/SG_harmonic.png) </div>
 
 ## Возможности
 Несколько вещей, которые вы можете сделать в генераторе сигналов:
@@ -17,8 +20,9 @@
 -   Масштабировать, копировать и сохранять полученные графики
 -   Просматривать построение графика в реальном времени
 -   Изменять параметры графика в реальном времени
+<div align="center">
 
-![Alt text](./Resources/SG_functional.gif) 
+![Alt text](./Resources/SG_functional.gif) </div>
 
 ## Стек технологий
 -   .NET Fraemwork 4.8 
