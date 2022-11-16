@@ -1,4 +1,5 @@
 # Signal Generator
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cccff4e49c964645ab08e2e7b4c4fcd4)](https://app.codacy.com/gh/Anarielle/SignalGenerator?utm_source=github.com&utm_medium=referral&utm_content=Anarielle/SignalGenerator&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/561dd59e468546138fe62c7d0be50caf)](https://www.codacy.com/gh/Anarielle/SignalGenerator/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Anarielle/SignalGenerator&amp;utm_campaign=Badge_Grade)
 
 ![Alt text](./Resources/SG_realtime.gif) 
