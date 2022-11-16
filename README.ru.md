@@ -1,8 +1,6 @@
 # Генератор сигналов
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/561dd59e468546138fe62c7d0be50caf)](https://www.codacy.com/gh/Anarielle/SignalGenerator/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Anarielle/SignalGenerator&amp;utm_campaign=Badge_Grade)
 
- 
-
 ![Alt text](./Resources/SG_realtime.gif) 
 
 ## О проекте 
@@ -23,11 +21,10 @@
 ![Alt text](./Resources/SG_functional.gif) 
 
 ## Стек технологий
-
 -  .NET Fraemwork 4.8 
 -  WPF
+-  C#
 -  Библиотека [ScottPlot](https://scottplot.net/ "Перейти на сайт ScottPlot") версия 4.1.45
 
 ## Статус проекта
-
-В будущем планируется доработка приложения: исправить отображение спектра сигнала, изменить/добавить график спектограммы, добавление возможности отображать графики звукового сигнала с микрофона
+В будущем планируется доработка приложения: исправить отображение спектра сигнала, изменить/добавить график спектограммы, добавление возможности отображать графики звукового сигнала с микрофона.
